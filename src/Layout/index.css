@@ -1,0 +1,7 @@
+.doadd-container {
+  min-height: 100vh;
+}
+
+.doadd-container>.content {
+  padding: 30px 0px;
+}
