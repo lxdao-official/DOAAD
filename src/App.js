@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import 'antd/dist/reset.css';
 import Layout from './Layout';
 import Home from './pages/Home';
-import List from './pages/List';
+import Article from './pages/Article';
 import Profile from './pages/Profile';
 import './App.css';
 
@@ -17,8 +17,8 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/list",
-        element: <List />,
+        path: "/article",
+        element: <Article />,
       },
       {
         path: "/profile",

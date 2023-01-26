@@ -17,8 +17,8 @@ const SearchInput = (props) => {
   };
 
   const handleChange = (newValue) => {
-    setValue(newValue);
     handleSearch(newValue);
+    setValue(newValue);
   };
 
   return (

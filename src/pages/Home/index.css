@@ -1,52 +1,52 @@
-.home-content {
+.home {
   padding: 20px 0px;
 }
 
-.home-content .title {
+.home .title {
   text-align: center;
   font-size: 40px;
 }
 
-.home-content .description {
+.home .description {
   text-align: center;
   font-size: 16px;
   margin-top: 30px;
 }
 
-.home-content .search-input {
+.home .search-input {
   margin-top: 40px;
   display: flex;
   justify-content: center;
 }
 
-.home-content .roadmap-item {
+.home .roadmap-item {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.home-content .roadmap-item>img {
+.home .roadmap-item>img {
   width: 50px;
   height: 50px;
   border-radius: 50px;
   background-color: #eee;
 }
 
-.home-content .roadmap-item>div {
+.home .roadmap-item>div {
   margin-left: 10px;
 }
 
-.home-content .intro.section>.content {
+.home .intro.section>.content {
   display: flex;
   justify-content: center;
 }
 
-.home-content .team.section>.content {
+.home .team.section>.content {
   display: flex;
   justify-content: space-between;
 }
 
-.home-content .team.section>.content>.member {
+.home .team.section>.content>.member {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,24 +54,24 @@
   box-sizing: border-box;
 }
 
-.home-content .team.section>.content>.member>img {
+.home .team.section>.content>.member>img {
   width: 80px;
   height: 80px;
   border-radius: 80px;
   background-color: #eee;
 }
 
-.home-content .team.section>.content>.member>.member-desc {
+.home .team.section>.content>.member>.member-desc {
   margin-top: 20px;
   width: 200px;
   text-align: center;
   word-wrap: break-word;
 }
 
-.home-content .content {
+.home .content {
   margin-top: 30px;
 }
 
-.home-content .section {
+.home .section {
   margin-top: 40px;
 }
