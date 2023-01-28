@@ -1,5 +1,5 @@
 import SearchInput from './components/search-input';
-import './index.css';
+import './index.less';
 
 export default function Home() {
   return (
