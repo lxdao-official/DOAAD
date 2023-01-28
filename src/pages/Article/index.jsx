@@ -1,5 +1,7 @@
 import React from 'react';
 import { Row, Col, Card, Avatar, Space, Table, Tag, Button } from 'antd'
+import Header from '../../components/header';
+import './index.less'
 const { Meta } = Card;
 
 const columns = [
@@ -77,38 +79,41 @@ const data = [
 
 export default function Article() {
   return (
-    <div className='article'>
-      <Row>
-        <Col span={10}>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <Card
-              style={{ width: 300 }}
-              hoverable
-              cover={
-                <img
-                  alt="example"
-                  src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+    <>
+      <Header />
+      <div className='article'>
+        <Row>
+          <Col span={10}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <Card
+                style={{ width: 300 }}
+                hoverable
+                cover={
+                  <img
+                    alt="example"
+                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                  />
+                }
+                actions={[<span>操作1</span>, <span>操作2</span>, <span>操作3</span>]}
+              >
+                <Meta
+                  avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+                  title="Card title"
+                  description="This is the description"
                 />
-              }
-              actions={[<span>操作1</span>, <span>操作2</span>, <span>操作3</span>]}
-            >
-              <Meta
-                avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-                title="Card title"
-                description="This is the description"
-              />
-            </Card>
-          </div>
-        </Col>
-        <Col span={14}>
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button>Publish</Button>
-          </div>
-          <div style={{ marginTop: 10 }}>
-            <Table columns={columns} dataSource={data} />
-          </div>
-        </Col>
-      </Row>
-    </div >
+              </Card>
+            </div>
+          </Col>
+          <Col span={14}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <Button>Publish</Button>
+            </div>
+            <div style={{ marginTop: 10 }}>
+              <Table columns={columns} dataSource={data} />
+            </div>
+          </Col>
+        </Row>
+      </div >
+    </>
   );
 };

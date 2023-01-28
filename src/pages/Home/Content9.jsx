@@ -15,7 +15,7 @@ class Content9 extends React.PureComponent {
         {...item.textWrapper}
       >
         <div key="time" {...item.time}>
-          {item.time.children}
+          {item.time?.children}
         </div>
         <h2 key="title" {...item.title}>
           <i {...item.icon}>

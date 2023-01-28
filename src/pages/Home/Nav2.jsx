@@ -51,7 +51,6 @@ class Header extends React.Component {
           className={`${dataSource.page.className}${phoneOpen ? ' open' : ''}`}
         >
           <TweenOne
-            animation={{ x: -30, type: 'from', ease: 'easeOutQuad' }}
             {...dataSource.logo}
           >
             <img width="100%" src={dataSource.logo.children} alt="img" />
