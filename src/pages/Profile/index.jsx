@@ -1,6 +1,7 @@
-import React from 'react';
-import { Row, Col, Card, Avatar, Form } from 'antd'
+import React, { useState, useRef } from 'react';
+import { Row, Col, Card, Avatar, Form, Modal, Button } from 'antd'
 import Header from '../../components/header';
+import FormProfile from '../../components/form-profile';
 import './index.less';
 const { Meta } = Card;
 const formItemLayout = {
@@ -8,22 +9,42 @@ const formItemLayout = {
   wrapperCol: { span: 14 },
 };
 export default function Profile() {
+  const [open, setOpen] = useState(false);
+  const formRef = useRef();
+  const showModal = () => {
+    setOpen(true);
+  };
+
+  const handleOk = () => {
+    formRef.current.handleSubmit().then(values => {
+      console.log('values: ', values);
+    });
+    // hideModal();
+  }
+
+  const hideModal = () => {
+    setOpen(false);
+  };
   return (
     <>
       <Header />
       <div className='profile'>
+        <Modal
+          title="Profile"
+          open={open}
+          onOk={handleOk}
+          onCancel={hideModal}
+          okText="Confirm"
+          cancelText="Cancel"
+        >
+          <FormProfile ref={formRef} />
+        </Modal>
         <Row>
           <Col span={10}>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
               <Card
                 style={{ width: 300 }}
                 hoverable
-                cover={
-                  <img
-                    alt="example"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                  />
-                }
                 actions={[<span>操作1</span>, <span>操作2</span>, <span>操作3</span>]}
               >
                 <Meta
@@ -31,6 +52,7 @@ export default function Profile() {
                   title="Card title"
                   description="This is the description"
                 />
+                <Button onClick={showModal}>Edit</Button>
               </Card>
             </div>
           </Col>

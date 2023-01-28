@@ -29,7 +29,7 @@ const FormPublish = (props, ref) => {
     return {
       handleSubmit,
     };
-  }, []);
+  }, [handleSubmit]);
 
   return (
     <Form
