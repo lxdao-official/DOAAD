@@ -1,6 +1,7 @@
-import React from 'react';
-import { Row, Col, Card, Avatar, Space, Table, Tag, Button } from 'antd'
+import React, { useState, useRef } from 'react';
+import { Row, Col, Card, Avatar, Space, Table, Tag, Button, Modal } from 'antd'
 import Header from '../../components/header';
+import FormPublish from '../../components/form-publish';
 import './index.less'
 const { Meta } = Card;
 
@@ -78,10 +79,36 @@ const data = [
 ];
 
 export default function Article() {
+  const [open, setOpen] = useState(false);
+  const formRef = useRef();
+  const showModal = () => {
+    setOpen(true);
+  };
+
+  const handleOk = () => {
+    formRef.current.handleSubmit().then(values => {
+      console.log('values: ', values);
+    });
+    // hideModal();
+  }
+
+  const hideModal = () => {
+    setOpen(false);
+  };
   return (
     <>
       <Header />
       <div className='article'>
+        <Modal
+          title="Publish Article"
+          open={open}
+          onOk={handleOk}
+          onCancel={hideModal}
+          okText="Confirm"
+          cancelText="Cancel"
+        >
+          <FormPublish ref={formRef} />
+        </Modal>
         <Row>
           <Col span={10}>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -106,7 +133,7 @@ export default function Article() {
           </Col>
           <Col span={14}>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <Button>Publish</Button>
+              <Button onClick={showModal}>Publish</Button>
             </div>
             <div style={{ marginTop: 10 }}>
               <Table columns={columns} dataSource={data} />
