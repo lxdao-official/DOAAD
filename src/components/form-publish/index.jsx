@@ -25,23 +25,29 @@ const FormPublish = (props, ref) => {
 
   const handleSubmit = () => form.validateFields();
 
-  useImperativeHandle(ref, () => {
-    return {
-      handleSubmit,
-    };
-  }, [handleSubmit]);
+  useImperativeHandle(
+    ref,
+    () => {
+      return {
+        handleSubmit,
+      };
+    },
+    [handleSubmit],
+  );
 
   return (
-    <Form
-      {...formItemLayout}
-      style={{ maxWidth: 600 }}
-      form={form}
-    >
-      <Form.Item name="title" label="title" rules={[{ required: true, message: 'Please input title' }]}
+    <Form {...formItemLayout} style={{ maxWidth: 600 }} form={form}>
+      <Form.Item
+        name="title"
+        label="title"
+        rules={[{ required: true, message: 'Please input title' }]}
       >
         <Input />
       </Form.Item>
-      <Form.Item name="content" label="content" rules={[{ required: true, message: 'Please input content' }]}
+      <Form.Item
+        name="content"
+        label="content"
+        rules={[{ required: true, message: 'Please input content' }]}
       >
         <Input.TextArea />
       </Form.Item>
@@ -51,7 +57,7 @@ const FormPublish = (props, ref) => {
             {fields.map((field, index) => (
               <Form.Item
                 {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
-                label={index === 0 ? "Cited CID" : ''}
+                label={index === 0 ? 'Cited CID' : ''}
                 required={false}
                 key={field.key}
               >
@@ -60,16 +66,16 @@ const FormPublish = (props, ref) => {
                   validateTrigger={['onChange', 'onBlur']}
                   rules={[
                     {
-                      required: true,
+                      required: false,
                       whitespace: true,
-                      message: "Please input CID or delete this field.",
+                      message: 'Please input CID or delete this field.',
                     },
                   ]}
                   noStyle
                 >
                   <Input placeholder="cited cid" style={{ width: '60%' }} />
                 </Form.Item>
-                {fields.length > 1 ? (
+                {fields.length > 0 ? (
                   <MinusCircleOutlined
                     style={{ marginLeft: 5 }}
                     onClick={() => remove(field.name)}
