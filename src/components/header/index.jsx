@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../../assets/logo.png';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 import './index.less';
 const Header = () => (
   <div className='header-wrapper'>
@@ -12,8 +13,8 @@ const Header = () => (
 
         </div>
       </div>
-      <div className='operation right-container'>
-
+      <div >
+        <ConnectButton />
       </div>
     </div>
   </div>

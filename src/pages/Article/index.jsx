@@ -1,8 +1,23 @@
 import React, { useState, useRef } from 'react';
-import { Row, Col, Card, Avatar, Space, Table, Tag, Button, Modal } from 'antd'
+import * as IPFS from 'ipfs-core';
+import { ethers } from 'ethers';
+import { usePrepareContractWrite, useContractWrite } from 'wagmi';
+import {
+  Row,
+  Col,
+  Card,
+  Avatar,
+  Space,
+  Table,
+  Tag,
+  Button,
+  Modal,
+  message,
+} from 'antd';
 import Header from '../../components/header';
+import { abi } from '../../abi/article';
 import FormPublish from '../../components/form-publish';
-import './index.less'
+import './index.less';
 const { Meta } = Card;
 
 const columns = [
@@ -79,26 +94,72 @@ const data = [
 ];
 
 export default function Article() {
+  const [messageApi, contextHolder] = message.useMessage();
   const [open, setOpen] = useState(false);
   const formRef = useRef();
   const showModal = () => {
     setOpen(true);
   };
 
-  const handleOk = () => {
-    formRef.current.handleSubmit().then(values => {
-      console.log('values: ', values);
-    });
-    // hideModal();
-  }
+  // 在合约上发布文章
+  const contractPublish = async (title, cid, cidList) => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    console.log(abi);
+    const contract = new ethers.Contract(
+      '0x5eF708FE60817c2a21DBad705B3752aB1879307E',
+      abi,
+      signer,
+    );
+    const data = await contract.citeFee();
+    const citeFee = parseInt(data._hex, 16);
+    if (typeof cidList == 'undefined') {
+      cidList = [];
+    }
+    const length = cidList.length;
+    console.log(length);
+    const tx = await contract.publishPaper(title, cid, cidList);
+    return tx;
+  };
+
+  //上传数据至ipfs
+  const uploadIpfs = async (value) => {
+    const ipfs = await IPFS.create({ repo: 'ok' + Math.random() });
+    const fileAdded = await ipfs.add(JSON.stringify(value));
+    const cid = fileAdded.path;
+    return cid;
+  };
+
+  const handleOk = async () => {
+    try {
+      const values = await formRef.current.handleSubmit();
+      console.log({ values });
+      const cid = await uploadIpfs(values);
+      console.log({ cid });
+      const tx = await contractPublish(values.title, cid, values.cidList);
+      messageApi.open({
+        type: 'success',
+        content: 'Upload Success',
+      });
+      console.log(tx);
+    } catch (error) {
+      console.error(error);
+      messageApi.open({
+        type: 'error',
+        content: 'Upload Failed',
+      });
+    }
+    hideModal();
+  };
 
   const hideModal = () => {
     setOpen(false);
   };
   return (
     <>
+      {contextHolder}
       <Header />
-      <div className='article'>
+      <div className="article">
         <Modal
           title="Publish Article"
           open={open}
@@ -121,7 +182,11 @@ export default function Article() {
                     src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
                   />
                 }
-                actions={[<span>操作1</span>, <span>操作2</span>, <span>操作3</span>]}
+                actions={[
+                  <span>操作1</span>,
+                  <span>操作2</span>,
+                  <span>操作3</span>,
+                ]}
               >
                 <Meta
                   avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
@@ -140,7 +205,7 @@ export default function Article() {
             </div>
           </Col>
         </Row>
-      </div >
+      </div>
     </>
   );
-};
+}

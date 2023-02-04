@@ -1,33 +1,60 @@
 import React from 'react';
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import 'antd/dist/reset.css';
 import Layout from './Layout';
 import Home from './pages/Home';
 import Article from './pages/Article';
 import Profile from './pages/Profile';
 import './App.css';
+import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import { configureChains, createClient, WagmiConfig } from 'wagmi';
+import { alchemyProvider } from 'wagmi/providers/alchemy';
+import { publicProvider } from 'wagmi/providers/public';
+import { mainnet, goerli } from 'wagmi/chains';
+import '@rainbow-me/rainbowkit/styles.css';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Layout />,
     children: [
       {
-        path: "/",
+        path: '/',
         element: <Home />,
       },
       {
-        path: "/article",
+        path: '/article',
         element: <Article />,
       },
       {
-        path: "/profile",
+        path: '/profile',
         element: <Profile />,
-      }
-    ]
-  }
+      },
+    ],
+  },
 ]);
 
-const App = () => <RouterProvider router={router} />;
+const { chains, provider } = configureChains(
+  [goerli],
+  [alchemyProvider({ apiKey: process.env.ALCHEMY_ID }), publicProvider()],
+);
 
+const { connectors } = getDefaultWallets({
+  appName: 'DOAAD',
+  chains,
+});
+
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors,
+  provider,
+});
+
+const App = () => (
+  <WagmiConfig client={wagmiClient}>
+    <RainbowKitProvider chains={chains} initialChain={goerli}>
+      <RouterProvider router={router} />
+    </RainbowKitProvider>
+  </WagmiConfig>
+);
 export default App;
