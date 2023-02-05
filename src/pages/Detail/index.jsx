@@ -5,9 +5,10 @@ import FormProfile from '../../components/form-profile';
 import { ethers } from 'ethers';
 import { abi } from '../../abi/article';
 import './index.less';
-import { readIpfs } from '../../util';
+import { readIpfs, retrieve } from '../../util';
 import config from '../../config';
 import { useParams } from 'react-router-dom';
+import { useAccount } from 'wagmi';
 const { Meta } = Card;
 const formItemLayout = {
   labelCol: { span: 6 },
@@ -15,14 +16,22 @@ const formItemLayout = {
 };
 export default function Detail() {
   const { id } = useParams();
+  const { address, isConnecting, isDisconnected } = useAccount();
   const [data, setData] = useState({
     title: '',
     cid: '',
-    citedCount: '',
+    citedCount: 0,
     publishTime: '',
     author: '',
-    citeTargetList: '',
+    citeTargetList: [],
     content: '',
+  });
+  const [profile, setProfile] = useState({
+    firstName: '',
+    lastName: '',
+    university: '',
+    email: '',
+    profit: 0,
   });
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -31,16 +40,24 @@ export default function Detail() {
     setOpen(true);
   };
 
+  const readProfile = async (address) => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(config.articleContract, abi, signer);
+    const cid = await contract.AuthorIntro(address);
+    const balance = await contract.AuthorBalance(address);
+    const data = await retrieve(cid);
+    data['profit'] = parseInt(balance._hex, 16);
+    return data;
+  };
+
   // read all article
   const readArticle = async () => {
-    setLoading(true);
-
     let article = {};
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(config.articleContract, abi, signer);
     const res = await contract.getPaper(id);
-    console.log(res);
     article['title'] = res[0];
     article['cid'] = res[1];
     article['citedCount'] = parseInt(res[2]._hex, 16);
@@ -50,13 +67,19 @@ export default function Detail() {
     article['id'] = parseInt(res[4]._hex, 16);
     article['author'] = res[5];
     article['citeTargetList'] = res[6];
-
-    const data = await readIpfs(res[1]);
-    console.log(data);
+    const data = await retrieve(res[1]);
     article['content'] = data.content;
-    setData(article);
-    setLoading(false);
-    // return data;
+
+    return article;
+  };
+  const readArticleTitle = async (id) => {
+    let article = {};
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(config.articleContract, abi, signer);
+    const res = await contract.getPaper(id);
+    article['title'] = res[0];
+    return article['title'];
   };
 
   const handleOk = () => {
@@ -71,7 +94,12 @@ export default function Detail() {
   };
   useEffect(() => {
     (async () => {
-      readArticle();
+      setLoading(true);
+      const article = await readArticle();
+      setData(article);
+      const profile = await readProfile(article['author']);
+      setProfile(profile);
+      setLoading(false);
     })();
   }, []);
   return (
@@ -82,22 +110,24 @@ export default function Detail() {
           <Col span={10}>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
               <Card
+                loading={loading}
+                className="card"
                 style={{ width: 300 }}
                 hoverable
-                // actions={[
-                //   <span>操作1</span>,
-                //   <span>操作2</span>,
-                //   <span>操作3</span>,
-                // ]}
               >
-                <Meta
-                  avatar={<Avatar src="https://i.pravatar.cc/300" />}
-                  title="Jaquan Koepp"
-                  description={data.author}
-                />
-                <p>Education Level: Bachelor's Degree</p>
-                <p>University: Erie Community College</p>
-                <p>Email: eroob@yahoo.com</p>
+                <Meta title={profile?.firstName + ' ' + profile?.lastName} />
+                <p>
+                  {'address: ' +
+                    data['author']?.slice(0, 8) +
+                    '...' +
+                    data['author']?.slice(-8, -1)}
+                </p>
+                <p>{'email: ' + profile?.email}</p>
+                <p>{'university: ' + profile?.university}</p>
+                <div className="container">
+                  <div className="label">Profit</div>
+                  <div className="data">{profile.profit}</div>
+                </div>
               </Card>
             </div>
           </Col>
@@ -116,18 +146,18 @@ export default function Detail() {
                 <Form.Item label="Publish Time">
                   <span className="ant-form-text">{data.publishTime}</span>
                 </Form.Item>
-                {/* <Form.Item label="Due Time">
-                <span className="ant-form-text">{data.}</span>
-              </Form.Item> */}
-                {/* <Form.Item label="Cited Hash">
-                <span className="ant-form-text"></span>
-              </Form.Item> */}
                 <Form.Item label="Cited Count">
                   <span className="ant-form-text">{data.citedCount}</span>
                 </Form.Item>
-                {/* <Form.Item label="Profit">
-                <span className="ant-form-text">{}</span>
-              </Form.Item> */}
+                <Form.Item label="Cited Article">
+                  {data.citeTargetList.map((value, index) => {
+                    return (
+                      <div>
+                        <a key={index} href={`/detail/${value}`}></a>
+                      </div>
+                    );
+                  })}
+                </Form.Item>
               </Form>
             </Col>
           </Spin>

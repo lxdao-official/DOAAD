@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import * as IPFS from 'ipfs-core';
 import { ethers } from 'ethers';
-import { usePrepareContractWrite, useContractWrite } from 'wagmi';
 import {
   Row,
   Col,
@@ -12,6 +11,7 @@ import {
   Tag,
   Button,
   Modal,
+  Spin,
   message,
 } from 'antd';
 import Header from '../../components/header';
@@ -19,8 +19,10 @@ import FormProfile from '../../components/form-profile';
 import { abi } from '../../abi/article';
 import FormPublish from '../../components/form-publish';
 import './index.less';
-import { uploadIpfs } from '../../util';
+import { readIpfs, uploadIpfs, retrieve } from '../../util';
 import config from '../../config';
+import { useAccount } from 'wagmi';
+import { data } from 'browserslist';
 const { Meta } = Card;
 
 const columns = [
@@ -28,7 +30,6 @@ const columns = [
     title: 'Title',
     dataIndex: 'paperName',
     key: 'paperName',
-    // render: (text) => <a>{text}</a>,
   },
   {
     title: 'Cid',
@@ -63,7 +64,16 @@ const columns = [
 
 export default function Article() {
   const [messageApi, contextHolder] = message.useMessage();
+  const { address, isConnecting, isDisconnected } = useAccount();
   const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [profile, setProfile] = useState({
+    firstName: '',
+    lastName: '',
+    university: '',
+    email: '',
+    profit: 0,
+  });
   const [open, setOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const formRef = useRef();
@@ -82,7 +92,6 @@ export default function Article() {
     const contract = new ethers.Contract(config.articleContract, abi, signer);
     const res = await contract.getPaperList();
     let data = [];
-    console.log(res);
     res.map((value, index) => {
       data.push({
         key: index,
@@ -97,7 +106,6 @@ export default function Article() {
         citeTargetList: value[6],
       });
     });
-    console.log(data);
     return data;
   };
 
@@ -107,6 +115,7 @@ export default function Article() {
     const signer = provider.getSigner();
     const contract = new ethers.Contract(config.articleContract, abi, signer);
     const data = await contract.citeFee();
+
     const citeFee = parseInt(data._hex, 16);
     if (typeof cidList == 'undefined') {
       cidList = [];
@@ -116,6 +125,23 @@ export default function Article() {
       value: ethers.utils.parseEther('' + length * 0.01),
     });
     return tx;
+  };
+  const updateProfile = async (cid) => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(config.articleContract, abi, signer);
+    const tx = await contract.setAuthorIntro(cid);
+    return tx;
+  };
+  const readProfile = async (address) => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(config.articleContract, abi, signer);
+    const cid = await contract.AuthorIntro(address);
+    const balance = await contract.AuthorBalance(address);
+    const data = await retrieve(cid);
+    data['profit'] = parseInt(balance._hex, 16);
+    return data;
   };
 
   const handleOk = async () => {
@@ -143,10 +169,23 @@ export default function Article() {
   const hideProfileModal = () => {
     setProfileOpen(false);
   };
-  const handleProfileOk = () => {
-    formRef.current.handleSubmit().then((values) => {
-      console.log('values: ', values);
-    });
+  const handleProfileOk = async () => {
+    try {
+      const values = await profileFormRef.current.handleSubmit();
+      console.log({ values });
+      const cid = await uploadIpfs(values);
+      const tx = await updateProfile(cid);
+      messageApi.open({
+        type: 'success',
+        content: 'Upload Success',
+      });
+    } catch (error) {
+      console.error(error);
+      messageApi.open({
+        type: 'error',
+        content: 'Upload Failed',
+      });
+    }
     // hideModal();
   };
 
@@ -154,6 +193,10 @@ export default function Article() {
     (async () => {
       const data = await readArticle();
       setList(data);
+      setLoading(true);
+      const profile = await readProfile(address);
+      setProfile(profile);
+      setLoading(false);
     })();
   }, []);
   return (
@@ -185,25 +228,31 @@ export default function Article() {
           <Col span={10}>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
               <Card
+                loading={loading}
+                className="card"
                 style={{ width: 300 }}
                 hoverable
-                cover={
-                  <img
-                    alt="example"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                  />
-                }
-                actions={[
-                  <span>操作1</span>,
-                  <Button onClick={showProfileModal}>Edit</Button>,
-                  <span>操作3</span>,
-                ]}
+                actions={[<Button onClick={showProfileModal}>Edit</Button>]}
               >
-                <Meta
-                  avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-                  title="Card title"
-                  description="This is the description"
-                />
+                <Meta title={profile?.firstName + ' ' + profile?.lastName} />
+                <p>
+                  {'address: ' +
+                    address?.slice(0, 8) +
+                    '...' +
+                    address?.slice(-8, -1)}
+                </p>
+                <p>{'email: ' + profile?.email}</p>
+                <p>{'university: ' + profile?.university}</p>
+                <div className="container">
+                  <div className="left">
+                    <div className="label">Articles</div>
+                    <div className="data">{list.length}</div>
+                  </div>
+                  <div className="right">
+                    <div className="label">Profit</div>
+                    <div className="data">{profile.profit}</div>
+                  </div>
+                </div>
               </Card>
             </div>
           </Col>

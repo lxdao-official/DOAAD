@@ -36,7 +36,10 @@ const router = createBrowserRouter([
 
 const { chains, provider } = configureChains(
   [goerli],
-  [alchemyProvider({ apiKey: process.env.ALCHEMY_ID }), publicProvider()],
+  [
+    alchemyProvider({ apiKey: process.env.REACT_APP_ALCHEMY_ID }),
+    publicProvider(),
+  ],
 );
 
 const { connectors } = getDefaultWallets({

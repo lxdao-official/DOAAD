@@ -17,33 +17,45 @@ const FormProfile = (props, ref) => {
 
   const handleSubmit = () => form.validateFields();
 
-  useImperativeHandle(ref, () => {
-    return {
-      handleSubmit,
-    };
-  }, [handleSubmit]);
+  useImperativeHandle(
+    ref,
+    () => {
+      return {
+        handleSubmit,
+      };
+    },
+    [handleSubmit],
+  );
 
   return (
-    <Form
-      {...formItemLayout}
-      style={{ maxWidth: 600 }}
-      form={form}
-    >
-      <Form.Item name="FirstName" label="First name" rules={[{ required: true, message: 'Please input first name' }]}
+    <Form {...formItemLayout} style={{ maxWidth: 600 }} form={form}>
+      <Form.Item
+        name="firstName"
+        label="First name"
+        rules={[{ required: true, message: 'Please input first name' }]}
       >
         <Input />
       </Form.Item>
-      <Form.Item name="LastName" label="Last name" rules={[{ required: true, message: 'Please input last name' }]}
+      <Form.Item
+        name="lastName"
+        label="Last name"
+        rules={[{ required: true, message: 'Please input last name' }]}
       >
         <Input />
       </Form.Item>
-      <Form.Item name="University" label="university" rules={[{ required: true, message: 'Please input university' }]}
+      <Form.Item
+        name="university"
+        label="university"
+        rules={[{ required: true, message: 'Please input university' }]}
       >
         <Input />
       </Form.Item>
-      <Form.Item name="email" label="email" rules={[{ required: true, message: 'Please input university' }]}
+      <Form.Item
+        name="email"
+        label="email"
+        rules={[{ required: true, message: 'Please input university' }]}
       >
-        <Input type='email' />
+        <Input type="email" />
       </Form.Item>
     </Form>
   );
