@@ -4,10 +4,6 @@ import { ethers } from 'ethers';
 import { abi } from '../../abi/article';
 import config from '../../config';
 
-const mockVal = (str, repeat = 1) => ({
-  value: str.repeat(repeat),
-});
-
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 const signer = provider.getSigner();
 const contract = new ethers.Contract(config.articleContract, abi, signer);
