@@ -1,4 +1,22 @@
 import * as IPFS from 'ipfs-core';
+import { Web3Storage } from 'web3.storage';
+
+const retrieve = async (cid) => {
+  const client = makeStorageClient();
+  const res = await client.get(cid);
+  console.log(`Got a response! [${res.status}] ${res.statusText}`);
+  if (!res.ok) {
+    throw new Error(`failed to get ${cid}`);
+  }
+
+  // request succeeded! do something with the response object here...
+  console.log(res);
+  return res;
+};
+
+function makeStorageClient() {
+  return new Web3Storage({ token: process.env.REACT_APP_WEB3STORAGE_TOKEN });
+}
 
 const readIpfs = async (cid) => {
   const ipfs = await IPFS.create({ repo: 'ok' + Math.random() });
@@ -22,4 +40,4 @@ const uploadIpfs = async (value) => {
   const cid = fileAdded.path;
   return cid;
 };
-export { readIpfs, uploadIpfs };
+export { readIpfs, uploadIpfs, retrieve };
