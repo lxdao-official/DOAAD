@@ -72,7 +72,7 @@ export default function Article() {
     lastName: '',
     university: '',
     email: '',
-    profit: 0,
+    profit: '',
   });
   const [open, setOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
@@ -140,7 +140,7 @@ export default function Article() {
     const cid = await contract.AuthorIntro(address);
     const balance = await contract.AuthorBalance(address);
     const data = await retrieve(cid);
-    data['profit'] = parseInt(balance._hex, 16);
+    data['profit'] = ethers.utils.formatEther(balance._hex);
     return data;
   };
 
@@ -172,7 +172,6 @@ export default function Article() {
   const handleProfileOk = async () => {
     try {
       const values = await profileFormRef.current.handleSubmit();
-      console.log({ values });
       const cid = await uploadIpfs(values);
       const tx = await updateProfile(cid);
       messageApi.open({
@@ -186,7 +185,7 @@ export default function Article() {
         content: 'Upload Failed',
       });
     }
-    // hideModal();
+    hideProfileModal();
   };
 
   useEffect(() => {

@@ -30,15 +30,17 @@ const SearchInput = () => {
   }, []);
 
   const onSearch = (searchText) => {
-    const optionsVal = list.filter(item => (item[0] || '').indexOf(searchText) !== -1).map(i => ({
-      label: i[0],
-      value: parseInt(i[4]),
-    }));
+    const optionsVal = list
+      .filter((item) => (item[0] || '').indexOf(searchText) !== -1)
+      .map((i) => ({
+        label: i[0],
+        value: parseInt(i[4]),
+      }));
     setOptions(optionsVal);
   };
 
   const onSelect = (data) => {
-    setValue(options.find(item => item.value === data).label);
+    setValue(options.find((item) => item.value === data).label);
     window.open(`/detail/${data}`);
   };
 
@@ -54,7 +56,7 @@ const SearchInput = () => {
       onSelect={onSelect}
       onSearch={onSearch}
       onChange={onChange}
-      placeholder="Enter title or description of article"
+      placeholder="Enter title to search"
     />
   );
 };

@@ -6,7 +6,9 @@ const Header = () => (
   <div className="header-wrapper">
     <div className="header-eth-operation">
       <div className="container-logo-operation">
-        <div className="operation left-container"></div>
+        <a href="/">
+          <img className="logo" src={logo} />
+        </a>
       </div>
       <div>
         <ConnectButton />

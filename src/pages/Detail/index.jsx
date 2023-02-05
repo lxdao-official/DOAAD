@@ -47,7 +47,7 @@ export default function Detail() {
     const cid = await contract.AuthorIntro(address);
     const balance = await contract.AuthorBalance(address);
     const data = await retrieve(cid);
-    data['profit'] = parseInt(balance._hex, 16);
+    data['profit'] = ethers.utils.formatEther(balance._hex);
     return data;
   };
 
@@ -66,7 +66,17 @@ export default function Detail() {
     ).toLocaleDateString();
     article['id'] = parseInt(res[4]._hex, 16);
     article['author'] = res[5];
-    article['citeTargetList'] = res[6];
+
+    article['citeTargetList'] = await Promise.all(
+      res[6].map(async (value, index) => {
+        const title = await readArticleTitle(value);
+
+        return {
+          id: parseInt(value, 16),
+          title: title,
+        };
+      }),
+    );
     const data = await retrieve(res[1]);
     article['content'] = data.content;
 
@@ -78,15 +88,7 @@ export default function Detail() {
     const signer = provider.getSigner();
     const contract = new ethers.Contract(config.articleContract, abi, signer);
     const res = await contract.getPaper(id);
-    article['title'] = res[0];
-    return article['title'];
-  };
-
-  const handleOk = () => {
-    formRef.current.handleSubmit().then((values) => {
-      console.log('values: ', values);
-    });
-    // hideModal();
+    return res[0];
   };
 
   const hideModal = () => {
@@ -133,7 +135,7 @@ export default function Detail() {
           </Col>
           <Spin spinning={loading}>
             <Col span={14}>
-              <Form style={{ maxWidth: 600 }} {...formItemLayout}>
+              <Form style={{ width: 600 }} {...formItemLayout}>
                 <Form.Item label="CID">
                   <span className="ant-form-text">{data.cid}</span>
                 </Form.Item>
@@ -153,7 +155,9 @@ export default function Detail() {
                   {data.citeTargetList.map((value, index) => {
                     return (
                       <div>
-                        <a key={index} href={`/detail/${value}`}></a>
+                        <a key={index} href={`/detail/${value.id}`}>
+                          {'[' + (index + 1) + ']. '} {value.title}
+                        </a>
                       </div>
                     );
                   })}

@@ -2,6 +2,8 @@ import React from 'react';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import LocaleSwitch from '../../components/locale-switch';
 import SearchInput from '../../components/search-input';
+import { HomeOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
 export const Nav20DataSource = (props) => {
   const { onLocaleChange } = props;
@@ -16,11 +18,29 @@ export const Nav20DataSource = (props) => {
           name: 'linkNav',
           to: '当前页面 ID 地址，参考如上',
           children: (
-            <div style={{ height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <div
+              style={{
+                height: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
               <LocaleSwitch onChange={onLocaleChange} />
               <div style={{ marginLeft: 20 }}>
                 <ConnectButton />
               </div>
+              <Link to="/article">
+                <HomeOutlined
+                  style={{
+                    marginLeft: '20px',
+                    color: 'white',
+                    padding: '4px',
+                    borderRadius: '50%',
+                    border: 'white solid 1px',
+                  }}
+                />
+              </Link>
             </div>
           ),
           className: 'menu-item',
@@ -105,7 +125,8 @@ export const Feature30DataSource = {
       {
         name: 'content',
         className: 'title-content',
-        children: 'DOAAD是一套致力重构当前学术论文发表流程的去中心化应用，它不仅仅能让你的论文永久存储，还能让你从你创作的论文中直接获取经济奖励。',
+        children:
+          'DOAAD是一套致力重构当前学术论文发表流程的去中心化应用，它不仅仅能让你的论文永久存储，还能让你从你创作的论文中直接获取经济奖励。',
       },
     ],
   },
@@ -127,8 +148,7 @@ export const Feature30DataSource = {
           title: { className: 'content3-title', children: '论文检索' },
           content: {
             className: 'content3-content',
-            children:
-              '快速检索所有链上论文',
+            children: '快速检索所有链上论文',
           },
         },
       },
@@ -147,8 +167,7 @@ export const Feature30DataSource = {
           title: { className: 'content3-title', children: '论文阅读' },
           content: {
             className: 'content3-content',
-            children:
-              '链上论文的在线阅读',
+            children: '链上论文的在线阅读',
           },
         },
       },
@@ -167,8 +186,7 @@ export const Feature30DataSource = {
           title: { className: 'content3-title', children: '论文发表' },
           content: {
             className: 'content3-content',
-            children:
-              '发表论文，并为所引用的论文支付稿费',
+            children: '发表论文，并为所引用的论文支付稿费',
           },
         },
       },
@@ -187,11 +205,10 @@ export const Feature30DataSource = {
           title: { className: 'content3-title', children: '奖励机制' },
           content: {
             className: 'content3-content',
-            children:
-              '当论文被其他论文创作者引用时获得代币奖励',
+            children: '当论文被其他论文创作者引用时获得代币奖励',
           },
         },
-      }
+      },
     ],
   },
 };
@@ -211,7 +228,8 @@ export const Feature30DataSourceEn = {
       {
         name: 'content',
         className: 'title-content',
-        children: 'DOAAD (Decentralized Open Access Article Database) is a set of decentralized applications dedicated to reconstructing the current academic paper publishing process. It not only allows your papers to be permanently stored, but also allows you to directly obtain economic rewards',
+        children:
+          'DOAAD (Decentralized Open Access Article Database) is a set of decentralized applications dedicated to reconstructing the current academic paper publishing process. It not only allows your papers to be permanently stored, but also allows you to directly obtain economic rewards',
       },
     ],
   },
@@ -233,8 +251,7 @@ export const Feature30DataSourceEn = {
           title: { className: 'content3-title', children: 'Search papers' },
           content: {
             className: 'content3-content',
-            children:
-              'Quickly retrieve papers on the chain',
+            children: 'Quickly retrieve papers on the chain',
           },
         },
       },
@@ -253,8 +270,7 @@ export const Feature30DataSourceEn = {
           title: { className: 'content3-title', children: 'Read papers' },
           content: {
             className: 'content3-content',
-            children:
-              'reading papers on the chain',
+            children: 'reading papers on the chain',
           },
         },
       },
@@ -273,8 +289,7 @@ export const Feature30DataSourceEn = {
           title: { className: 'content3-title', children: 'Publish papers' },
           content: {
             className: 'content3-content',
-            children:
-              'Publish papers and pay royalties for cited papers',
+            children: 'Publish papers and pay royalties for cited papers',
           },
         },
       },
@@ -297,7 +312,7 @@ export const Feature30DataSourceEn = {
               'Receive token rewards when papers are cited by other paper creators',
           },
         },
-      }
+      },
     ],
   },
 };
@@ -321,8 +336,16 @@ export const Content90DataSource = {
           textWrapper: { className: 'text-wrapper' },
           name: { className: 'block-main-title', children: 'Q1' },
           post: { className: 'block-post', children: '' },
-          title: { className: 'block-title', children: '进一步调研用户，确定目标用户，识别用户需求，确保未来发展计划中的重心' },
-          content: { className: 'block-content', children: '完善DAPP中论文的存储字段，使之更贴近现实中的论文结构，如：作者、摘要、关键词等等。添加文件上传功能，降低用户使用难度' },
+          title: {
+            className: 'block-title',
+            children:
+              '进一步调研用户，确定目标用户，识别用户需求，确保未来发展计划中的重心',
+          },
+          content: {
+            className: 'block-content',
+            children:
+              '完善DAPP中论文的存储字段，使之更贴近现实中的论文结构，如：作者、摘要、关键词等等。添加文件上传功能，降低用户使用难度',
+          },
         },
       },
       {
@@ -334,8 +357,16 @@ export const Content90DataSource = {
           textWrapper: { className: 'text-wrapper' },
           name: { className: 'block-main-title', children: 'Q2' },
           post: { className: 'block-post', children: '' },
-          title: { className: 'block-title', children: '重新设计UI，完善文章检索功能，最终达到和传统数据库无异的搜索速度' },
-          content: { className: 'block-content', children: '设计基于ZK的用户DID子系统，保护用户隐私的同时实现作者链下身份与链上身份的对应，为作者提供更多链下价值，增加用户的作恶成本' },
+          title: {
+            className: 'block-title',
+            children:
+              '重新设计UI，完善文章检索功能，最终达到和传统数据库无异的搜索速度',
+          },
+          content: {
+            className: 'block-content',
+            children:
+              '设计基于ZK的用户DID子系统，保护用户隐私的同时实现作者链下身份与链上身份的对应，为作者提供更多链下价值，增加用户的作恶成本',
+          },
         },
       },
       {
@@ -347,7 +378,11 @@ export const Content90DataSource = {
           textWrapper: { className: 'text-wrapper' },
           name: { className: 'block-main-title', children: 'Q3' },
           post: { className: 'block-post', children: '' },
-          title: { className: 'block-title', children: '接入同行评审系统，设计同行评审奖励机制，提高DOAAD中所发布论文的质量' },
+          title: {
+            className: 'block-title',
+            children:
+              '接入同行评审系统，设计同行评审奖励机制，提高DOAAD中所发布论文的质量',
+          },
           content: { className: 'block-content', children: '' },
         },
       },
@@ -360,7 +395,11 @@ export const Content90DataSource = {
           textWrapper: { className: 'text-wrapper' },
           name: { className: 'block-main-title', children: 'Q4' },
           post: { className: 'block-post', children: '' },
-          title: { className: 'block-title', children: '设计早期用户的奖励机制，招募高校推广大使，寻求合作组织，扩大社会影响力、知名度' },
+          title: {
+            className: 'block-title',
+            children:
+              '设计早期用户的奖励机制，招募高校推广大使，寻求合作组织，扩大社会影响力、知名度',
+          },
           content: { className: 'block-content', children: '' },
         },
       },
@@ -387,8 +426,16 @@ export const Content90DataSourceEn = {
           textWrapper: { className: 'text-wrapper' },
           name: { className: 'block-main-title', children: 'Q1' },
           post: { className: 'block-post', children: '' },
-          title: { className: 'block-title', children: 'Further research on users, determine target users, identify user needs, and ensure the focus of future development plans' },
-          content: { className: 'block-content', children: 'Improve the storage fields of papers in DAPP to make it closer to the structure of papers in reality, such as: author, abstract, keywords, etc. Add file upload function to reduce user difficulty' },
+          title: {
+            className: 'block-title',
+            children:
+              'Further research on users, determine target users, identify user needs, and ensure the focus of future development plans',
+          },
+          content: {
+            className: 'block-content',
+            children:
+              'Improve the storage fields of papers in DAPP to make it closer to the structure of papers in reality, such as: author, abstract, keywords, etc. Add file upload function to reduce user difficulty',
+          },
         },
       },
       {
@@ -400,8 +447,16 @@ export const Content90DataSourceEn = {
           textWrapper: { className: 'text-wrapper' },
           name: { className: 'block-main-title', children: 'Q2' },
           post: { className: 'block-post', children: '' },
-          title: { className: 'block-title', children: 'Redesign the UI, improve the article retrieval function, and finally achieve the same search speed as traditional databases' },
-          content: { className: 'block-content', children: "Design a ZK-based user DID subsystem to protect user privacy while realizing the correspondence between the author's off-chain identity and on-chain identity, providing authors with more off-chain value and increasing the user's cost of doing evil" },
+          title: {
+            className: 'block-title',
+            children:
+              'Redesign the UI, improve the article retrieval function, and finally achieve the same search speed as traditional databases',
+          },
+          content: {
+            className: 'block-content',
+            children:
+              "Design a ZK-based user DID subsystem to protect user privacy while realizing the correspondence between the author's off-chain identity and on-chain identity, providing authors with more off-chain value and increasing the user's cost of doing evil",
+          },
         },
       },
       {
@@ -413,7 +468,11 @@ export const Content90DataSourceEn = {
           textWrapper: { className: 'text-wrapper' },
           name: { className: 'block-main-title', children: 'Q3' },
           post: { className: 'block-post', children: '' },
-          title: { className: 'block-title', children: 'Connect to the peer review system, design a peer review reward mechanism, and improve the quality of papers published in DOAAD' },
+          title: {
+            className: 'block-title',
+            children:
+              'Connect to the peer review system, design a peer review reward mechanism, and improve the quality of papers published in DOAAD',
+          },
           content: { className: 'block-content', children: '' },
         },
       },
@@ -426,7 +485,11 @@ export const Content90DataSourceEn = {
           textWrapper: { className: 'text-wrapper' },
           name: { className: 'block-main-title', children: 'Q4' },
           post: { className: 'block-post', children: '' },
-          title: { className: 'block-title', children: 'Connect to the peer review system, design a peer review reward mechanism, and improve the quality of papers published in DOAAD' },
+          title: {
+            className: 'block-title',
+            children:
+              'Connect to the peer review system, design a peer review reward mechanism, and improve the quality of papers published in DOAAD',
+          },
           content: { className: 'block-content', children: '' },
         },
       },
@@ -467,8 +530,7 @@ export const Teams10DataSource = {
             {
               name: 'content1',
               className: 'teams1-content',
-              children:
-                '',
+              children: '',
             },
           ],
         },
@@ -495,8 +557,7 @@ export const Teams10DataSource = {
             {
               name: 'content1',
               className: 'teams1-content',
-              children:
-                '',
+              children: '',
             },
           ],
         },
@@ -523,8 +584,7 @@ export const Teams10DataSource = {
             {
               name: 'content1',
               className: 'teams1-content',
-              children:
-                '',
+              children: '',
             },
           ],
         },
@@ -551,8 +611,7 @@ export const Teams10DataSource = {
             {
               name: 'content1',
               className: 'teams1-content',
-              children:
-                '',
+              children: '',
             },
           ],
         },
@@ -579,8 +638,7 @@ export const Teams10DataSource = {
             {
               name: 'content1',
               className: 'teams1-content',
-              children:
-                '',
+              children: '',
             },
           ],
         },
@@ -630,7 +688,6 @@ export const Footer20DataSource = {
   },
   links: {
     className: 'links',
-    children: [
-    ],
+    children: [],
   },
 };
