@@ -1,8 +1,10 @@
 @homepage: home-page;
+
 .@{homepage}-wrapper {
   width: 100%;
   position: relative;
   overflow: hidden;
+
   .@{homepage} {
     height: 100%;
     max-width: 1200px;
@@ -10,11 +12,14 @@
     margin: auto;
     will-change: transform;
   }
-  .title-wrapper > h1, > h1 {
+
+  .title-wrapper>h1,
+  >h1 {
     font-size: 32px;
     color: @text-color;
     margin-bottom: 16px;
   }
+
   .title-wrapper {
     margin: 0 auto 64px;
     text-align: center;
@@ -22,20 +27,23 @@
 }
 
 .@{homepage} {
-  padding: 128px 24px;
+  padding: 128px 24px 64px;
 }
 
 @media screen and (max-width: 767px) {
   .@{homepage}-wrapper {
     .@{homepage} {
       padding: 56px 24px;
+
       >h1 {
         font-size: 24px;
         margin: 0 auto 32px;
+
         &.title-h1 {
           margin-bottom: 8px;
         }
       }
+
       >p {
         margin-bottom: 32px;
       }
