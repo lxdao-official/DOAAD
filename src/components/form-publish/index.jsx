@@ -57,7 +57,7 @@ const FormPublish = (props, ref) => {
             {fields.map((field, index) => (
               <Form.Item
                 {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
-                label={index === 0 ? 'Cited CID' : ''}
+                label={index === 0 ? 'Cited ID' : ''}
                 required={false}
                 key={field.key}
               >
@@ -73,7 +73,7 @@ const FormPublish = (props, ref) => {
                   ]}
                   noStyle
                 >
-                  <Input placeholder="cited cid" style={{ width: '60%' }} />
+                  <Input placeholder="cited id" style={{ width: '60%' }} />
                 </Form.Item>
                 {fields.length > 0 ? (
                   <MinusCircleOutlined
@@ -91,7 +91,7 @@ const FormPublish = (props, ref) => {
                   style={{ width: '60%' }}
                   icon={<PlusOutlined />}
                 >
-                  Add CID
+                  Add Cite
                 </Button>
               </div>
               <Form.ErrorList errors={errors} />

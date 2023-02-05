@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import * as IPFS from 'ipfs-core';
 import { ethers } from 'ethers';
 import { usePrepareContractWrite, useContractWrite } from 'wagmi';
@@ -15,6 +15,7 @@ import {
   message,
 } from 'antd';
 import Header from '../../components/header';
+import FormProfile from '../../components/form-profile';
 import { abi } from '../../abi/article';
 import FormPublish from '../../components/form-publish';
 import './index.less';
@@ -22,90 +23,88 @@ const { Meta } = Card;
 
 const columns = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    render: (text) => <a>{text}</a>,
+    title: 'Title',
+    dataIndex: 'paperName',
+    key: 'paperName',
+    // render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-  {
-    title: 'Tags',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: (_, { tags }) => (
-      <>
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? 'geekblue' : 'green';
-          if (tag === 'loser') {
-            color = 'volcano';
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
+    title: 'Cid',
+    dataIndex: 'paperCid',
+    key: 'paperCid',
+    render: (text) => (
+      <span>
+        {text.slice(0, 4)}...{text.slice(-4, -1)}
+      </span>
     ),
+  },
+  {
+    title: 'Publish Time',
+    dataIndex: 'publishTime',
+    key: 'publishTime',
+  },
+  {
+    title: 'Cited Count',
+    dataIndex: 'citedCount',
+    key: 'citedCount',
   },
   {
     title: 'Action',
     key: 'action',
     render: (_, record) => (
       <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
+        <a>Detail</a>
       </Space>
     ),
   },
 ];
 
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-];
-
 export default function Article() {
   const [messageApi, contextHolder] = message.useMessage();
+  const [list, setList] = useState([]);
   const [open, setOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const formRef = useRef();
+  const profileFormRef = useRef();
+  const showProfileModal = () => {
+    setProfileOpen(true);
+  };
   const showModal = () => {
     setOpen(true);
   };
 
-  // 在合约上发布文章
-  const contractPublish = async (title, cid, cidList) => {
+  // read all article
+  const readArticle = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-    console.log(abi);
+    const contract = new ethers.Contract(
+      '0x5eF708FE60817c2a21DBad705B3752aB1879307E',
+      abi,
+      signer,
+    );
+    const res = await contract.getPaperList();
+    let data = [];
+    res.map((value, index) => {
+      data.push({
+        key: index,
+        paperName: value[0],
+        paperCid: value[1],
+        citedCount: parseInt(value[2]._hex, 16),
+        publishTime: new Date(
+          parseInt(value[3]._hex, 16) * 1000,
+        ).toLocaleDateString(),
+        author: value[4],
+        citeTargetList: value[5],
+      });
+    });
+    console.log(data);
+    return data;
+  };
+
+  // publish article
+  const publish = async (title, cid, cidList) => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
     const contract = new ethers.Contract(
       '0x5eF708FE60817c2a21DBad705B3752aB1879307E',
       abi,
@@ -117,8 +116,9 @@ export default function Article() {
       cidList = [];
     }
     const length = cidList.length;
-    console.log(length);
-    const tx = await contract.publishPaper(title, cid, cidList);
+    const tx = await contract.publishPaper(title, cid, cidList, {
+      value: ethers.utils.parseEther('' + length * 0.01),
+    });
     return tx;
   };
 
@@ -136,7 +136,7 @@ export default function Article() {
       console.log({ values });
       const cid = await uploadIpfs(values);
       console.log({ cid });
-      const tx = await contractPublish(values.title, cid, values.cidList);
+      const tx = await publish(values.title, cid, values.cidList);
       messageApi.open({
         type: 'success',
         content: 'Upload Success',
@@ -155,11 +155,37 @@ export default function Article() {
   const hideModal = () => {
     setOpen(false);
   };
+  const hideProfileModal = () => {
+    setProfileOpen(false);
+  };
+  const handleProfileOk = () => {
+    formRef.current.handleSubmit().then((values) => {
+      console.log('values: ', values);
+    });
+    // hideModal();
+  };
+
+  useEffect(() => {
+    (async () => {
+      const data = await readArticle();
+      setList(data);
+    })();
+  }, []);
   return (
     <>
       {contextHolder}
       <Header />
       <div className="article">
+        <Modal
+          title="Detail"
+          open={profileOpen}
+          onOk={handleProfileOk}
+          onCancel={hideProfileModal}
+          okText="Confirm"
+          cancelText="Cancel"
+        >
+          <FormProfile ref={profileFormRef} />
+        </Modal>
         <Modal
           title="Publish Article"
           open={open}
@@ -184,7 +210,7 @@ export default function Article() {
                 }
                 actions={[
                   <span>操作1</span>,
-                  <span>操作2</span>,
+                  <Button onClick={showProfileModal}>Edit</Button>,
                   <span>操作3</span>,
                 ]}
               >
@@ -201,7 +227,7 @@ export default function Article() {
               <Button onClick={showModal}>Publish</Button>
             </div>
             <div style={{ marginTop: 10 }}>
-              <Table columns={columns} dataSource={data} />
+              <Table columns={columns} dataSource={list} />
             </div>
           </Col>
         </Row>

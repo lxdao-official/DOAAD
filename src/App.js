@@ -4,7 +4,7 @@ import 'antd/dist/reset.css';
 import Layout from './Layout';
 import Home from './pages/Home';
 import Article from './pages/Article';
-import Profile from './pages/Profile';
+import Detail from './pages/Detail';
 import './App.css';
 import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
@@ -27,8 +27,8 @@ const router = createBrowserRouter([
         element: <Article />,
       },
       {
-        path: '/profile',
-        element: <Profile />,
+        path: '/detail/:id',
+        element: <Detail />,
       },
     ],
   },
