@@ -1,6 +1,5 @@
 import React from 'react';
 import QueueAnim from 'rc-queue-anim';
-import { Col } from 'antd';
 import OverPack from 'rc-scroll-anim/lib/ScrollOverPack';
 import { getChildrenToRender } from './utils';
 

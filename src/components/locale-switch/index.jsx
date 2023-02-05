@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Button, Tooltip } from 'antd';
+import { Tooltip } from 'antd';
 import './index.less';
 
 // true => cn, false => en
 const LocaleSwitch = (props) => {
   const { onChange } = props;
-  const [locale, setLocale] = useState(true);
+  const [locale, setLocale] = useState(false);
   const handleSwitchLocale = () => {
-    onChange && onChange(!locale);
+    onChange && onChange(!locale ? 'cn' : 'en');
     setLocale(!locale)
   };
 

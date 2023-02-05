@@ -2,66 +2,69 @@ import React from 'react';
 import LocaleSwitch from '../../components/locale-switch';
 import SearchInput from '../../components/search-input';
 
-export const Nav20DataSource = {
-  isScrollLink: true,
-  wrapper: { className: 'header2 home-page-wrapper jrhtw9ph4a-editor_css' },
-  page: { className: 'home-page' },
-  LinkMenu: {
-    className: 'header2-menu',
-    children: [
-      {
-        name: 'linkNav',
-        to: '当前页面 ID 地址，参考如上',
-        children: (
-          <div style={{ height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <LocaleSwitch />
-          </div>
-        ),
-        className: 'menu-item',
-      },
-    ],
-  },
-  mobileMenu: { className: 'header2-mobile-menu' },
-  Menu: {
-    children: [
-      {
-        name: 'Banner3_0',
-        to: 'Banner3_0',
-        children: '首页',
-        className: 'active menu-item',
-      },
-      {
-        name: 'Content8_0',
-        to: 'Content8_0',
-        children: '特邀嘉宾',
-        className: 'menu-item',
-      },
-      {
-        name: 'Content9_0',
-        to: 'Content9_0',
-        children: '会议日程',
-        className: 'menu-item',
-      },
-      {
-        name: 'Content10_0',
-        to: 'Content10_0',
-        children: '大会地址',
-        className: 'menu-item',
-      },
-      {
-        name: 'Content11_0',
-        to: 'Content11_0',
-        children: '展台展示',
-        className: 'menu-item',
-      },
-      {
-        name: 'Content12_0',
-        to: 'Content12_0',
-        children: '特别鸣谢',
-        className: 'menu-item',
-      },
-    ],
-  },
+export const Nav20DataSource = (props) => {
+  const { onLocaleChange } = props;
+  return {
+    isScrollLink: true,
+    wrapper: { className: 'header2 home-page-wrapper jrhtw9ph4a-editor_css' },
+    page: { className: 'home-page' },
+    LinkMenu: {
+      className: 'header2-menu',
+      children: [
+        {
+          name: 'linkNav',
+          to: '当前页面 ID 地址，参考如上',
+          children: (
+            <div style={{ height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <LocaleSwitch onChange={onLocaleChange} />
+            </div>
+          ),
+          className: 'menu-item',
+        },
+      ],
+    },
+    mobileMenu: { className: 'header2-mobile-menu' },
+    Menu: {
+      children: [
+        {
+          name: 'Banner3_0',
+          to: 'Banner3_0',
+          children: '首页',
+          className: 'active menu-item',
+        },
+        {
+          name: 'Content8_0',
+          to: 'Content8_0',
+          children: '特邀嘉宾',
+          className: 'menu-item',
+        },
+        {
+          name: 'Content9_0',
+          to: 'Content9_0',
+          children: '会议日程',
+          className: 'menu-item',
+        },
+        {
+          name: 'Content10_0',
+          to: 'Content10_0',
+          children: '大会地址',
+          className: 'menu-item',
+        },
+        {
+          name: 'Content11_0',
+          to: 'Content11_0',
+          children: '展台展示',
+          className: 'menu-item',
+        },
+        {
+          name: 'Content12_0',
+          to: 'Content12_0',
+          children: '特别鸣谢',
+          className: 'menu-item',
+        },
+      ],
+    },
+  };
 };
 export const Banner30DataSource = {
   wrapper: { className: 'banner3 ldfl1dtohjk-editor_css' },
@@ -188,6 +191,113 @@ export const Feature30DataSource = {
     ],
   },
 };
+
+export const Feature30DataSourceEn = {
+  wrapper: { className: 'home-page-wrapper content3-wrapper' },
+  page: { className: 'home-page content3' },
+  OverPack: { playScale: 0.3 },
+  titleWrapper: {
+    className: 'title-wrapper',
+    children: [
+      {
+        name: 'title',
+        children: 'Intro',
+        className: 'title-h1',
+      },
+      {
+        name: 'content',
+        className: 'title-content',
+        children: 'DOAAD (Decentralized Open Access Article Database) is a set of decentralized applications dedicated to reconstructing the current academic paper publishing process. It not only allows your papers to be permanently stored, but also allows you to directly obtain economic rewards',
+      },
+    ],
+  },
+  block: {
+    className: 'content3-block-wrapper',
+    children: [
+      {
+        name: 'block0',
+        className: 'content3-block',
+        md: 6,
+        xs: 24,
+        children: {
+          icon: {
+            className: 'content3-icon',
+            children:
+              'https://zos.alipayobjects.com/rmsportal/ScHBSdwpTkAHZkJ.png',
+          },
+          textWrapper: { className: 'content3-text' },
+          title: { className: 'content3-title', children: 'Search papers' },
+          content: {
+            className: 'content3-content',
+            children:
+              'Quickly retrieve papers on the chain',
+          },
+        },
+      },
+      {
+        name: 'block1',
+        className: 'content3-block',
+        md: 6,
+        xs: 24,
+        children: {
+          icon: {
+            className: 'content3-icon',
+            children:
+              'https://zos.alipayobjects.com/rmsportal/NKBELAOuuKbofDD.png',
+          },
+          textWrapper: { className: 'content3-text' },
+          title: { className: 'content3-title', children: 'Read papers' },
+          content: {
+            className: 'content3-content',
+            children:
+              'reading papers on the chain',
+          },
+        },
+      },
+      {
+        name: 'block2',
+        className: 'content3-block',
+        md: 6,
+        xs: 24,
+        children: {
+          icon: {
+            className: 'content3-icon',
+            children:
+              'https://zos.alipayobjects.com/rmsportal/xMSBjgxBhKfyMWX.png',
+          },
+          textWrapper: { className: 'content3-text' },
+          title: { className: 'content3-title', children: 'Publish papers' },
+          content: {
+            className: 'content3-content',
+            children:
+              'Publish papers and pay royalties for cited papers',
+          },
+        },
+      },
+      {
+        name: 'block3',
+        className: 'content3-block',
+        md: 6,
+        xs: 24,
+        children: {
+          icon: {
+            className: 'content3-icon',
+            children:
+              'https://zos.alipayobjects.com/rmsportal/MNdlBNhmDBLuzqp.png',
+          },
+          textWrapper: { className: 'content3-text' },
+          title: { className: 'content3-title', children: 'Reward mechanism' },
+          content: {
+            className: 'content3-content',
+            children:
+              'Receive token rewards when papers are cited by other paper creators',
+          },
+        },
+      }
+    ],
+  },
+};
+
 export const Content90DataSource = {
   wrapper: { className: 'home-page-wrapper content9-wrapper' },
   page: { className: 'home-page content9' },
@@ -253,6 +363,73 @@ export const Content90DataSource = {
     ],
   },
 };
+
+export const Content90DataSourceEn = {
+  wrapper: { className: 'home-page-wrapper content9-wrapper' },
+  page: { className: 'home-page content9' },
+  titleWrapper: {
+    className: 'title-wrapper',
+    children: [{ name: 'title', children: 'RoadMap', className: 'title-h1' }],
+  },
+  block: {
+    className: 'timeline',
+    children: [
+      {
+        name: 'block0',
+        className: 'block-wrapper',
+        playScale: 0.3,
+        children: {
+          imgWrapper: { className: 'image-wrapper' },
+          textWrapper: { className: 'text-wrapper' },
+          name: { className: 'block-main-title', children: 'Q1' },
+          post: { className: 'block-post', children: '' },
+          title: { className: 'block-title', children: 'Further research on users, determine target users, identify user needs, and ensure the focus of future development plans' },
+          content: { className: 'block-content', children: 'Improve the storage fields of papers in DAPP to make it closer to the structure of papers in reality, such as: author, abstract, keywords, etc. Add file upload function to reduce user difficulty' },
+        },
+      },
+      {
+        name: 'block1',
+        className: 'block-wrapper',
+        playScale: 0.3,
+        children: {
+          imgWrapper: { className: 'image-wrapper' },
+          textWrapper: { className: 'text-wrapper' },
+          name: { className: 'block-main-title', children: 'Q2' },
+          post: { className: 'block-post', children: '' },
+          title: { className: 'block-title', children: 'Redesign the UI, improve the article retrieval function, and finally achieve the same search speed as traditional databases' },
+          content: { className: 'block-content', children: "Design a ZK-based user DID subsystem to protect user privacy while realizing the correspondence between the author's off-chain identity and on-chain identity, providing authors with more off-chain value and increasing the user's cost of doing evil" },
+        },
+      },
+      {
+        name: 'block2',
+        className: 'block-wrapper',
+        playScale: 0.3,
+        children: {
+          imgWrapper: { className: 'image-wrapper' },
+          textWrapper: { className: 'text-wrapper' },
+          name: { className: 'block-main-title', children: 'Q3' },
+          post: { className: 'block-post', children: '' },
+          title: { className: 'block-title', children: 'Connect to the peer review system, design a peer review reward mechanism, and improve the quality of papers published in DOAAD' },
+          content: { className: 'block-content', children: '' },
+        },
+      },
+      {
+        name: 'block3',
+        className: 'block-wrapper',
+        playScale: 0.3,
+        children: {
+          imgWrapper: { className: 'image-wrapper' },
+          textWrapper: { className: 'text-wrapper' },
+          name: { className: 'block-main-title', children: 'Q4' },
+          post: { className: 'block-post', children: '' },
+          title: { className: 'block-title', children: 'Connect to the peer review system, design a peer review reward mechanism, and improve the quality of papers published in DOAAD' },
+          content: { className: 'block-content', children: '' },
+        },
+      },
+    ],
+  },
+};
+
 export const Teams10DataSource = {
   wrapper: { className: 'home-page-wrapper teams1-wrapper' },
   page: { className: 'home-page teams1' },
