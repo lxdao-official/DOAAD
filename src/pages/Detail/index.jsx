@@ -3,14 +3,15 @@ import { Row, Col, Card, Avatar, Form, Modal, Button, Spin } from 'antd';
 import Header from '../../components/header';
 import FormProfile from '../../components/form-profile';
 import { ethers } from 'ethers';
-import * as IPFS from 'ipfs-core';
 import { abi } from '../../abi/article';
 import './index.less';
+import { readIpfs } from '../../util';
+import config from '../../config';
 import { useParams } from 'react-router-dom';
 const { Meta } = Card;
 const formItemLayout = {
   labelCol: { span: 6 },
-  wrapperCol: { span: 14 },
+  wrapperCol: { span: 18 },
 };
 export default function Detail() {
   const { id } = useParams();
@@ -30,22 +31,6 @@ export default function Detail() {
     setOpen(true);
   };
 
-  const readIpfs = async (cid) => {
-    const ipfs = await IPFS.create({ repo: 'ok' + Math.random() });
-    console.log(cid);
-    const stream = ipfs.cat(cid);
-    const decoder = new TextDecoder();
-    let str = '';
-
-    for await (const chunk of stream) {
-      // chunks of data are returned as a Uint8Array, convert it back to a string
-      str += decoder.decode(chunk, { stream: true });
-    }
-    const data = JSON.parse(str);
-    return data;
-  };
-  console.log(loading);
-
   // read all article
   const readArticle = async () => {
     setLoading(true);
@@ -53,11 +38,7 @@ export default function Detail() {
     let article = {};
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-    const contract = new ethers.Contract(
-      '0x5eF708FE60817c2a21DBad705B3752aB1879307E',
-      abi,
-      signer,
-    );
+    const contract = new ethers.Contract(config.articleContract, abi, signer);
     const res = await contract.getPaper(id);
     console.log(res);
     article['title'] = res[0];
@@ -66,14 +47,14 @@ export default function Detail() {
     article['publishTime'] = new Date(
       parseInt(res[3]._hex, 16) * 1000,
     ).toLocaleDateString();
-    article['author'] = res[4];
-    article['citeTargetList'] = res[5];
+    article['id'] = parseInt(res[4]._hex, 16);
+    article['author'] = res[5];
+    article['citeTargetList'] = res[6];
 
     const data = await readIpfs(res[1]);
-    console.log({ data });
+    console.log(data);
     article['content'] = data.content;
     setData(article);
-    console.log(article);
     setLoading(false);
     // return data;
   };
@@ -122,7 +103,7 @@ export default function Detail() {
           </Col>
           <Spin spinning={loading}>
             <Col span={14}>
-              <Form style={{ minWidth: 600 }} {...formItemLayout}>
+              <Form style={{ maxWidth: 600 }} {...formItemLayout}>
                 <Form.Item label="CID">
                   <span className="ant-form-text">{data.cid}</span>
                 </Form.Item>
