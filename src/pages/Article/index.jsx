@@ -19,6 +19,8 @@ import FormProfile from '../../components/form-profile';
 import { abi } from '../../abi/article';
 import FormPublish from '../../components/form-publish';
 import './index.less';
+import { uploadIpfs } from '../../util';
+import config from '../../config';
 const { Meta } = Card;
 
 const columns = [
@@ -53,7 +55,7 @@ const columns = [
     key: 'action',
     render: (_, record) => (
       <Space size="middle">
-        <a>Detail</a>
+        <a href={`/detail/${record.id}`}>Detail</a>
       </Space>
     ),
   },
@@ -77,13 +79,10 @@ export default function Article() {
   const readArticle = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-    const contract = new ethers.Contract(
-      '0x5eF708FE60817c2a21DBad705B3752aB1879307E',
-      abi,
-      signer,
-    );
+    const contract = new ethers.Contract(config.articleContract, abi, signer);
     const res = await contract.getPaperList();
     let data = [];
+    console.log(res);
     res.map((value, index) => {
       data.push({
         key: index,
@@ -93,8 +92,9 @@ export default function Article() {
         publishTime: new Date(
           parseInt(value[3]._hex, 16) * 1000,
         ).toLocaleDateString(),
-        author: value[4],
-        citeTargetList: value[5],
+        id: value[4],
+        author: value[5],
+        citeTargetList: value[6],
       });
     });
     console.log(data);
@@ -105,11 +105,7 @@ export default function Article() {
   const publish = async (title, cid, cidList) => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-    const contract = new ethers.Contract(
-      '0x5eF708FE60817c2a21DBad705B3752aB1879307E',
-      abi,
-      signer,
-    );
+    const contract = new ethers.Contract(config.articleContract, abi, signer);
     const data = await contract.citeFee();
     const citeFee = parseInt(data._hex, 16);
     if (typeof cidList == 'undefined') {
@@ -122,26 +118,15 @@ export default function Article() {
     return tx;
   };
 
-  //上传数据至ipfs
-  const uploadIpfs = async (value) => {
-    const ipfs = await IPFS.create({ repo: 'ok' + Math.random() });
-    const fileAdded = await ipfs.add(JSON.stringify(value));
-    const cid = fileAdded.path;
-    return cid;
-  };
-
   const handleOk = async () => {
     try {
       const values = await formRef.current.handleSubmit();
-      console.log({ values });
       const cid = await uploadIpfs(values);
-      console.log({ cid });
       const tx = await publish(values.title, cid, values.cidList);
       messageApi.open({
         type: 'success',
         content: 'Upload Success',
       });
-      console.log(tx);
     } catch (error) {
       console.error(error);
       messageApi.open({
