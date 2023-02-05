@@ -6,7 +6,6 @@ const Header = () => (
     <div className="header-eth-operation">
       <div className="container-logo-operation">
         <div className='operation left-container'>
-
         </div>
       </div>
       <div >

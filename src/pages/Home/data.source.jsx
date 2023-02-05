@@ -1,4 +1,5 @@
 import React from 'react';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 import LocaleSwitch from '../../components/locale-switch';
 import SearchInput from '../../components/search-input';
 
@@ -17,6 +18,9 @@ export const Nav20DataSource = (props) => {
           children: (
             <div style={{ height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <LocaleSwitch onChange={onLocaleChange} />
+              <div style={{ marginLeft: 20 }}>
+                <ConnectButton />
+              </div>
             </div>
           ),
           className: 'menu-item',
