@@ -14,9 +14,11 @@ import {
   Nav20DataSource,
   Banner30DataSource,
   Feature30DataSource,
+  Feature30DataSourceEn,
   Content90DataSource,
   Teams10DataSource,
   Footer20DataSource,
+  Content90DataSourceEn,
 } from './data.source';
 import './less/antMotionStyle.less';
 
@@ -33,6 +35,7 @@ export default class Home extends React.Component {
     this.state = {
       isMobile,
       show: !location.port, // 如果不是 dva 2.0 请删除
+      locale: 'en',
     };
   }
 
@@ -54,41 +57,53 @@ export default class Home extends React.Component {
     /* 如果不是 dva 2.0 请删除 end */
   }
 
+  onLocaleChange = (val) => {
+    console.log('locale change  ======> : ', val);
+    this.setState({ locale: val });
+  }
+
   render() {
+    const { locale } = this.state;
     const children = [
       <Nav2
         id="Nav2_0"
         key="Nav2_0"
-        dataSource={Nav20DataSource}
+        locale={locale}
+        dataSource={Nav20DataSource({ onLocaleChange: this.onLocaleChange })}
         isMobile={this.state.isMobile}
       />,
       <Banner3
         id="Banner3_0"
         key="Banner3_0"
+        locale={locale}
         dataSource={Banner30DataSource}
         isMobile={this.state.isMobile}
       />,
       <Feature3
         id="Feature3_0"
         key="Feature3_0"
-        dataSource={Feature30DataSource}
+        locale={locale}
+        dataSource={locale === 'cn' ? Feature30DataSource : Feature30DataSourceEn}
         isMobile={this.state.isMobile}
       />,
       <Content9
         id="Content9_0"
         key="Content9_0"
-        dataSource={Content90DataSource}
+        locale={locale}
+        dataSource={locale === 'cn' ? Content90DataSource : Content90DataSourceEn}
         isMobile={this.state.isMobile}
       />,
       <Teams1
         id="Teams1_0"
         key="Teams1_0"
+        locale={locale}
         dataSource={Teams10DataSource}
         isMobile={this.state.isMobile}
       />,
       <Footer2
         id="Footer2_0"
         key="Footer2_0"
+        locale={locale}
         dataSource={Footer20DataSource}
         isMobile={this.state.isMobile}
       />,

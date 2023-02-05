@@ -1,6 +1,5 @@
 import React from 'react';
 import QueueAnim from 'rc-queue-anim';
-import { Row, Col } from 'antd';
 import OverPack from 'rc-scroll-anim/lib/ScrollOverPack';
 import { getChildrenToRender } from './utils';
 
@@ -9,9 +8,9 @@ class Teams1 extends React.PureComponent {
     data.map((item, i) => {
       const { titleWrapper, ...$item } = item;
       return (
-        <Col key={i.toString()} {...$item}>
+        <div key={i.toString()} {...$item}>
           {titleWrapper.children.map(getChildrenToRender)}
-        </Col>
+        </div>
       );
     });
 
@@ -33,9 +32,11 @@ class Teams1 extends React.PureComponent {
               key="block"
               leaveReverse
               {...dataSource.block}
-              component={Row}
+              component={'div'}
             >
-              {listChildren}
+              <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+                {listChildren}
+              </div>
             </QueueAnim>
           </OverPack>
         </div>

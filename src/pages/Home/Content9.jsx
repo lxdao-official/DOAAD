@@ -18,9 +18,9 @@ class Content9 extends React.PureComponent {
           {item.time?.children}
         </div>
         <h2 key="title" {...item.title}>
-          <i {...item.icon}>
+          {/* <i {...item.icon}>
             <img src={item.icon.children} alt="img" />
-          </i>
+          </i> */}
           {item.title.children}
         </h2>
         <div key="p" {...item.content}>
@@ -39,9 +39,9 @@ class Content9 extends React.PureComponent {
           delay={isMobile ? [100, 0] : 0}
           {...item.imgWrapper}
         >
-          <div key="image" {...item.img}>
+          {/* <div key="image" {...item.img}>
             <img src={item.img.children} alt="img" />
-          </div>
+          </div> */}
           <div key="name" className="name-wrapper">
             <div key="name" {...item.name}>
               {item.name.children}
