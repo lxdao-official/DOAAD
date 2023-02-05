@@ -480,13 +480,13 @@ export const Teams10DataSource = {
               name: 'image',
               className: 'teams1-image',
               children:
-                'https://s3.us-west-2.amazonaws.com/secure.notion-static.com/9c47a35c-30c3-4e05-9fd3-4461c744e2e4/avatar_%281%29.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230205%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230205T074533Z&X-Amz-Expires=86400&X-Amz-Signature=8a72af804eb0fb3e6e12e4a9543ae179d6151844ff3a91b0e5f58b96813f0e5b&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22avatar%2520%281%29.png%22&x-id=GetObject',
+                'https://s3.us-west-2.amazonaws.com/secure.notion-static.com/1a90bba0-2ff4-46a2-a6b7-923e0c16819f/Untitled.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230205%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230205T081830Z&X-Amz-Expires=86400&X-Amz-Signature=b4ceb0e6b64168c43ff933383c76f0dfaead9c53d5f8558baab1f737dc2acf72&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.jpeg%22&x-id=GetObject',
             },
-            { name: 'title', className: 'teams1-title', children: '0xhardman' },
+            { name: 'title', className: 'teams1-title', children: 'Arvin' },
             {
               name: 'content',
               className: 'teams1-job',
-              children: 'Frontend Developer, Product Developer',
+              children: 'Frontend Developer',
             },
             {
               name: 'content1',
