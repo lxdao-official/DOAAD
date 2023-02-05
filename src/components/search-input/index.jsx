@@ -39,7 +39,7 @@ const SearchInput = () => {
 
   const onSelect = (data) => {
     setValue(options.find(item => item.value === data).label);
-    window.open(`/article?id=${data}`);
+    window.open(`/detail/${data}`);
   };
 
   const onChange = (data) => {
