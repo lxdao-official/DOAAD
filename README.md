@@ -38,6 +38,10 @@ As we mentioned in the diagrams, this will be a very important workflow for sele
 
 **For the record, we haven't finished the donation feature due to limited time. Also, we only support paying $FIL to just your upstream cited papers for now.**
 
+## Screenshots for MVP
+
+TODO @hardman
+
 ## Roadmap
 
 For now, this is an incomplete MVP for FVM Hackathon. This is just the beginning, we have a longer plans for this project.
@@ -64,10 +68,12 @@ Design the reward mechanism for early users, recruit university promotion ambass
 
 ## Team
 
+TODO add more info and links like github, twitter, etc
+
 - 0xhardman
 - ArvinZhong
 - Lidamao
-- BruceXu
+- [BruceXu](https://github.com/brucexu-eth): LXDAO Core buidler, FullStack Developer, Presenter, and test tokens provider :). Twitter: [@brucexu_eth](https://twitter.com/brucexu_eth)
 - Noy
 
 Most of the teammates came from [LXDAO](https://lxdao.io/). LXDAO is an R&D-focused DAO in Web3, and got Filecoin grants before for contributing IPFS ecosystem.
