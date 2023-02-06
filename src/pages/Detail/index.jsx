@@ -73,7 +73,7 @@ export default function Detail() {
         const title = await readArticleTitle(value);
 
         return {
-          id: parseInt(value, 16),
+          id: value,
           title: title,
         };
       }),
