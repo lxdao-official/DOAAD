@@ -40,7 +40,30 @@ As we mentioned in the diagrams, this will be a very important workflow for sele
 
 ## Screenshots for MVP
 
-TODO @hardman
+### Index
+
+Enter the title to search the article you want to read.
+![](diagrams/index.png)
+
+### Article Detail
+
+You can see article title, content and cited articles here, if you want to cite this article please remember its id which will be used when publish.
+![](diagrams/article-detail.png)
+
+### Article List
+
+Here you can edit your profile, publish your articles, view your article list, and how much profit you have made.
+![](diagrams/article-list.png)
+
+### Edit profile
+
+![](diagrams/edit-profile.png)
+
+### Publish Article
+
+![](diagrams/publish-article.png)
+
+
 
 ## Roadmap
 
@@ -70,7 +93,7 @@ Design the reward mechanism for early users, recruit university promotion ambass
 
 TODO add more info and links like github, twitter, etc
 
-- 0xhardman
+- [0xhardman](https://github.com/): LXDAO builder, striving to become a full-stack web3 developer, Loving to try something new. Twiter:[@fuckingsafari](https://twitter.com/fuckingsafari)
 - ArvinZhong
 - Lidamao
 - [BruceXu](https://github.com/brucexu-eth): LXDAO Core buidler, FullStack Developer, Presenter, and test tokens provider :). Twitter: [@brucexu_eth](https://twitter.com/brucexu_eth)

@@ -137,6 +137,9 @@ export default function Detail() {
           <Spin spinning={loading}>
             <Col span={14}>
               <Form style={{ width: 600 }} {...formItemLayout}>
+                <Form.Item label="ID">
+                  <span className="ant-form-text">{data.id}</span>
+                </Form.Item>
                 <Form.Item label="CID">
                   <span className="ant-form-text">{data.cid}</span>
                 </Form.Item>
