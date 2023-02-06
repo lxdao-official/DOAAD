@@ -1,15 +1,17 @@
 import React from 'react';
+import logo from '../../assets/logo.png';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 import './index.less';
 const Header = () => (
-  <div className='header-wrapper'>
+  <div className="header-wrapper">
     <div className="header-eth-operation">
       <div className="container-logo-operation">
-        <div className='operation left-container'>
-
-        </div>
+        <a href="/">
+          <img className="logo" src={logo} />
+        </a>
       </div>
-      <div className='operation right-container'>
-
+      <div>
+        <ConnectButton />
       </div>
     </div>
   </div>
