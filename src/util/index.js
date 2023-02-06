@@ -1,5 +1,6 @@
 import * as IPFS from 'ipfs-core';
 import { Web3Storage } from 'web3.storage';
+import { NFTStorage, File } from 'nft.storage';
 
 // const retrieve = async (cid) => {
 //   const client = makeStorageClient();
@@ -16,7 +17,8 @@ import { Web3Storage } from 'web3.storage';
 // };
 
 const retrieve = async (cid) => {
-  const res = await fetch(`https://ipfs.io/ipfs/${cid}`);
+  const res = await fetch(`https://${cid}.ipfs.nftstorage.link`);
+  console.log(`https://${cid}.ipfs.nftstorage.link`);
   console.log(`Got a response! [${res.status}] ${res.statusText}`);
   if (!res.ok) {
     throw new Error(`failed to get ${cid}`);
@@ -46,10 +48,23 @@ const readIpfs = async (cid) => {
 };
 
 //上传数据至ipfs
+// const uploadIpfs = async (value) => {
+//   const ipfs = await IPFS.create({ repo: 'ok' + Math.random() });
+//   const fileAdded = await ipfs.add(JSON.stringify(value));
+//   const cid = fileAdded.path;
+//   return cid;
+// };
 const uploadIpfs = async (value) => {
-  const ipfs = await IPFS.create({ repo: 'ok' + Math.random() });
-  const fileAdded = await ipfs.add(JSON.stringify(value));
-  const cid = fileAdded.path;
+  const nftstorage = new NFTStorage({
+    token: process.env.REACT_APP_NFT_STORAGE_KEY,
+  });
+  const cid = await nftstorage.storeBlob(
+    new Blob([JSON.stringify(value)], {
+      type: 'application/json',
+    }),
+  );
+  console.log(cid);
   return cid;
 };
+
 export { readIpfs, uploadIpfs, retrieve };

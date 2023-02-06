@@ -58,6 +58,7 @@ export default function Detail() {
     const signer = provider.getSigner();
     const contract = new ethers.Contract(config.articleContract, abi, signer);
     const res = await contract.getPaper(id);
+    console.log(res);
     article['title'] = res[0];
     article['cid'] = res[1];
     article['citedCount'] = parseInt(res[2]._hex, 16);
