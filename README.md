@@ -2,6 +2,8 @@
 
 Keywords: FIL, IPFS, DeSci, Academic, Paper.
 
+Smart Contract for DOAAD: <https://github.com/lxdao-official/DOAAD-contract/>
+
 DOAAD (Decentralized Open Access Article Database) is a set of decentralized applications dedicated to **reconstructing the current academic paper publishing process**. It not only allows your papers to be permanently stored, but also allows you to directly obtain economic rewards from the papers you create . DOAAD can help you do the following:
 
 1. Search papers.
