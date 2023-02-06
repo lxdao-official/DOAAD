@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+# DOAAD
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Keywords: FIL, IPFS, DeSci, Academic, Paper.
 
-## Available Scripts
+DOAAD (Decentralized Open Access Article Database) is a set of decentralized applications dedicated to **reconstructing the current academic paper publishing process**. It not only allows your papers to be permanently stored, but also allows you to directly obtain economic rewards from the papers you create . DOAAD can help you do the following:
 
-In the project directory, you can run:
+1. Search papers.
+2. Read the paper.
+3. Publish papers and pay royalties for cited papers.
+4. Receive token rewards when papers are cited by other paper creators.
 
-### `yarn start`
+**DOAAD provided a brand new way to keep and maintain human knowledge, making them: Open, Free to access, sustainable, and decentralized.**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Background
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+In the current process of publishing papers, **authors of papers need to pay huge page fees to publishers** (Elsevier: $200 and $10,100 US Dollars), and **readers also need to pay high fees to read the papers**. Among them, **the biggest beneficiaries are the publishers**, not the hard-working researchers. No penny of the fees paid by readers flows into the hands of the authors, and **the publishers block the channels that motivate researchers to create more valuable papers**.
 
-### `yarn test`
+Furthermore, researchers can only obtain the recognition of universities/institutions/enterprises by publishing their papers in journals with high impact factors, and then obtain more income and higher positions, so that the value of the paper itself is underestimated, and **more and more researchers have to produce some low-quality papers for publication in order to make a living**.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+In summary, **our team believes that the current paper publication process greatly hinders the dissemination of knowledge and the development of science**. The good news is that with the development of blockchain in recent years, the improvement of smart contracts, the application of IPFS, and decentralized peer review The proposal of the mechanism has given us new hope! For those reasons, we designed DOAAD and plan to gradually improve it in the coming year.
 
-### `yarn build`
+## How does it work?
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+TODO
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Roadmap
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+For now, this is an incomplete MVP for FVM hackathon. This is just the beginning, we have a longer plans for this project.
 
-### `yarn eject`
+### Q1
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Further research on users, determine target users, identify user needs, and ensure the focus of future development plans.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Improve the storage fields of papers in DAPP to make it closer to the structure of papers in reality, such as: author, abstract, keywords, etc. Add file upload function to reduce user difficulty.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Q2
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Redesign the UI, improve the article retrieval function, and finally achieve the same search speed as traditional databases.
 
-## Learn More
+Design a ZK-based user DID subsystem to protect user privacy while realizing the correspondence between the author's off-chain identity and on-chain identity, providing authors with more off-chain value and increasing the user's cost of doing evil.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Q3
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Connect to the decentralized peer review system, design a peer review reward mechanism, and improve the quality of papers published in DOAAD.
 
-### Code Splitting
+### Q4
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Design the reward mechanism for early users, recruit university promotion ambassadors, seek cooperative organizations, and expand social influence and popularity.
 
-### Analyzing the Bundle Size
+## Team
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- 0xhardman
+- ArvinZhong
+- Lidamao
+- BruceXu
+- Noy
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Most of the teammates came from [LXDAO](https://lxdao.io/). LXDAO is an R&D-focused DAO in Web3, and got Filecoin grants before for contributing IPFS ecosystem.
