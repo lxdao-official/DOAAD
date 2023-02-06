@@ -21,11 +21,26 @@ In summary, **our team believes that the current paper publication process great
 
 ## How does it work?
 
-TODO
+The process of incomplete MVP for the FVM Hackathon is super simple:
+
+- Authors can create an academic profile on DOAAD
+- Authors can search and cite papers on DOAAD. When creating the paper, they need to pay $FIL for the paper uploading. They need to pay more if they cite more papers
+- The $FIL will be used for keeping papers on IPFS, and part of them will flow to the Authors (including cited Authors)
+- Readers can search and read the papers on DOAAD. Also, they can make donations to the paper they like for maintaining paper on IPFS and supporting the Authors
+
+![](diagrams/1.png)
+
+Our innovation for the new paper publishing system is the sustainability cycle:
+
+![](diagrams/2.png)
+
+As we mentioned in the diagrams, this will be a very important workflow for selecting and maintaining valuable papers. Valuable papers will last longer, and the authors will receive more tokens, this strategy will encourage researchers to focus on their domain and create valuable papers.
+
+**For the record, we haven't finished the donation feature due to limited time. Also, we only support paying $FIL to just your upstream cited papers for now.**
 
 ## Roadmap
 
-For now, this is an incomplete MVP for FVM hackathon. This is just the beginning, we have a longer plans for this project.
+For now, this is an incomplete MVP for FVM Hackathon. This is just the beginning, we have a longer plans for this project.
 
 ### Q1
 
