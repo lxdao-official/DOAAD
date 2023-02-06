@@ -1,5 +1,5 @@
 const config = {
-  articleContract: '0xe52b6804F864136E8c987234D7E24A3CaE63081E',
+  articleContract: '0x332a1d18bf89d41597d0cb125d5b0a0cdb7a51e0',
 };
 
 export default config;

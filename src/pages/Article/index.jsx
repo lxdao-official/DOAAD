@@ -27,6 +27,11 @@ const { Meta } = Card;
 
 const columns = [
   {
+    title: 'Id',
+    dataIndex: 'id',
+    key: 'id',
+  },
+  {
     title: 'Title',
     dataIndex: 'paperName',
     key: 'paperName',
@@ -101,11 +106,12 @@ export default function Article() {
         publishTime: new Date(
           parseInt(value[3]._hex, 16) * 1000,
         ).toLocaleDateString(),
-        id: value[4],
+        id: parseInt(value[4]._hex, 16),
         author: value[5],
         citeTargetList: value[6],
       });
     });
+    console.log(data);
     return data;
   };
 

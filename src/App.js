@@ -10,7 +10,7 @@ import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
-import { mainnet, goerli } from 'wagmi/chains';
+import { goerli, filecoinHyperspace } from 'wagmi/chains';
 import '@rainbow-me/rainbowkit/styles.css';
 
 const router = createBrowserRouter([
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
 ]);
 
 const { chains, provider } = configureChains(
-  [goerli],
+  [filecoinHyperspace, goerli],
   [
     alchemyProvider({ apiKey: process.env.REACT_APP_ALCHEMY_ID }),
     publicProvider(),
@@ -55,7 +55,7 @@ const wagmiClient = createClient({
 
 const App = () => (
   <WagmiConfig client={wagmiClient}>
-    <RainbowKitProvider chains={chains} initialChain={goerli}>
+    <RainbowKitProvider chains={chains} initialChain={filecoinHyperspace}>
       <RouterProvider router={router} />
     </RainbowKitProvider>
   </WagmiConfig>
