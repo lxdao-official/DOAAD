@@ -97,6 +97,6 @@ TODO add more info and links like github, twitter, etc
 - ArvinZhong
 - Lidamao
 - [BruceXu](https://github.com/brucexu-eth): LXDAO Core buidler, FullStack Developer, Presenter, and test tokens provider :). Twitter: [@brucexu_eth](https://twitter.com/brucexu_eth)
-- Noy
+- [Noy](https://github.com/noyyyy): Slacks off. Twitter: [Noy](https://twitter.com/Noy_eth)
 
 Most of the teammates came from [LXDAO](https://lxdao.io/). LXDAO is an R&D-focused DAO in Web3, and got Filecoin grants before for contributing IPFS ecosystem.
