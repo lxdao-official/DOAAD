@@ -63,8 +63,6 @@ Here you can edit your profile, publish your articles, view your article list, a
 
 ![](diagrams/publish-article.png)
 
-
-
 ## Roadmap
 
 For now, this is an incomplete MVP for FVM Hackathon. This is just the beginning, we have a longer plans for this project.
