@@ -4,6 +4,12 @@ import LocaleSwitch from '../../components/locale-switch';
 import SearchInput from '../../components/search-input';
 import { HomeOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import avatar1 from '../../assets/avatar1.png';
+import avatar2 from '../../assets/avatar2.png';
+import avatar3 from '../../assets/avatar3.png';
+import avatar4 from '../../assets/avatar4.png';
+import avatar5 from '../../assets/avatar5.png';
+import locale from 'antd/es/date-picker/locale/en_US';
 
 export const Nav20DataSource = (props) => {
   const { onLocaleChange } = props;
@@ -90,7 +96,7 @@ export const Nav20DataSource = (props) => {
     },
   };
 };
-export const Banner30DataSource = {
+export const Banner30DataSource = ({ locale }) => ({
   wrapper: { className: 'banner3 ldfl1dtohjk-editor_css' },
   textWrapper: {
     className: 'banner3-text-wrapper',
@@ -106,10 +112,10 @@ export const Banner30DataSource = {
         className: 'banner3-name',
         children: 'Decentralized Open Access Article Database',
       },
-      { name: 'name', className: 'banner3-button', children: <SearchInput /> },
+      { name: 'name', className: 'banner3-button', children: <SearchInput locale={locale} /> },
     ],
   },
-};
+});
 export const Feature30DataSource = {
   wrapper: { className: 'home-page-wrapper content3-wrapper' },
   page: { className: 'home-page content3' },
@@ -500,7 +506,7 @@ export const Content90DataSourceEn = {
 export const Teams10DataSource = {
   wrapper: { className: 'home-page-wrapper teams1-wrapper' },
   page: { className: 'home-page teams1' },
-  OverPack: { playScale: 0.3, className: '' },
+  OverPack: { playScale: 0.2, className: '' },
   titleWrapper: {
     className: 'title-wrapper',
     children: [{ name: 'title', children: 'Team' }],
@@ -518,8 +524,7 @@ export const Teams10DataSource = {
             {
               name: 'image',
               className: 'teams1-image',
-              children:
-                'https://s3.us-west-2.amazonaws.com/secure.notion-static.com/9c47a35c-30c3-4e05-9fd3-4461c744e2e4/avatar_%281%29.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230205%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230205T074533Z&X-Amz-Expires=86400&X-Amz-Signature=8a72af804eb0fb3e6e12e4a9543ae179d6151844ff3a91b0e5f58b96813f0e5b&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22avatar%2520%281%29.png%22&x-id=GetObject',
+              children: <img alt="avatar" src={avatar1} />,
             },
             { name: 'title', className: 'teams1-title', children: '0xhardman' },
             {
@@ -545,8 +550,7 @@ export const Teams10DataSource = {
             {
               name: 'image',
               className: 'teams1-image',
-              children:
-                'https://s3.us-west-2.amazonaws.com/secure.notion-static.com/1a90bba0-2ff4-46a2-a6b7-923e0c16819f/Untitled.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230205%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230205T081830Z&X-Amz-Expires=86400&X-Amz-Signature=b4ceb0e6b64168c43ff933383c76f0dfaead9c53d5f8558baab1f737dc2acf72&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.jpeg%22&x-id=GetObject',
+              children: <img alt="avatar" src={avatar4} />,
             },
             {
               name: 'title',
@@ -576,8 +580,7 @@ export const Teams10DataSource = {
             {
               name: 'image',
               className: 'teams1-image',
-              children:
-                'https://s3.us-west-2.amazonaws.com/secure.notion-static.com/07a6af21-a39b-4a4c-a949-dc1b8f47e020/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230205%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230205T162207Z&X-Amz-Expires=86400&X-Amz-Signature=8619cf3b57ced5cc9413b90dc9eae62dccec0c7b1a41e36d57054ff4bf7f0eb3&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject',
+              children: <img alt="avatar" src={avatar2} />,
             },
             { name: 'title', className: 'teams1-title', children: 'BruceXu' },
             {
@@ -603,10 +606,9 @@ export const Teams10DataSource = {
             {
               name: 'image',
               className: 'teams1-image',
-              children:
-                'https://s3.us-west-2.amazonaws.com/secure.notion-static.com/029abac9-9a80-4f01-a31b-807603304284/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230205%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230205T162242Z&X-Amz-Expires=86400&X-Amz-Signature=a20a9ba5de57bae36ddef1906ad21be1548941433b26c2d0a501bd755deaeeeb&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject',
+              children: <img alt="avatar" src={avatar5} />,
             },
-            { name: 'title', className: 'teams1-title', children: '李大猫' },
+            { name: 'title', className: 'teams1-title', children: 'Lidamao' },
             {
               name: 'content',
               className: 'teams1-job',
@@ -630,8 +632,7 @@ export const Teams10DataSource = {
             {
               name: 'image',
               className: 'teams1-image',
-              children:
-                'https://s3.us-west-2.amazonaws.com/secure.notion-static.com/02668192-b8e6-4b7f-b9ba-18f6f2b55aa4/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230205%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230205T162319Z&X-Amz-Expires=86400&X-Amz-Signature=84ba336df649d69d7b01d96b4cefa6b191c1905a87766c711a8096b5f01906f8&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject',
+              children: <img alt="avatar" src={avatar3} />,
             },
             { name: 'title', className: 'teams1-title', children: 'Noy' },
             {
@@ -679,7 +680,7 @@ export const Content110DataSource = {
 };
 export const Footer20DataSource = {
   wrapper: { className: 'home-page-wrapper footer2-wrapper' },
-  OverPack: { className: 'home-page footer2', playScale: 0.05 },
+  OverPack: { className: 'home-page footer2', playScale: 0.01 },
   copyright: {
     className: 'copyright',
     children: [

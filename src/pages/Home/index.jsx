@@ -76,7 +76,7 @@ export default class Home extends React.Component {
         id="Banner3_0"
         key="Banner3_0"
         locale={locale}
-        dataSource={Banner30DataSource}
+        dataSource={Banner30DataSource({ locale })}
         isMobile={this.state.isMobile}
       />,
       <Feature3

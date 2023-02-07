@@ -8,7 +8,7 @@ const provider = new ethers.providers.Web3Provider(window.ethereum);
 const signer = provider.getSigner();
 const contract = new ethers.Contract(config.articleContract, abi, signer);
 
-const SearchInput = () => {
+const SearchInput = ({ locale }) => {
   const [value, setValue] = useState('');
   const [options, setOptions] = useState([]);
   const [list, setList] = useState([]);
@@ -16,8 +16,8 @@ const SearchInput = () => {
     try {
       const res = await contract.getAllPaper();
       setList(res);
-    } catch (_err) {
-      message.error('数据请求报错');
+    } catch (err) {
+      message.error(locale === 'cn' ? '数据请求出错' : 'Data request error');
     }
   };
 
